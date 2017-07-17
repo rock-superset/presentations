@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Frontend presentation - pilot</title>
+    
+    <meta name="description" content="" />
+    <meta name="author" content="Rock Wang" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/impress-demo.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+
+<body class="impress-not-supported">
+
+<!--
+    this fallback message is only visible when there is `impress-not-supported` class on body.
+-->
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features.</b></p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<!--
+    
+    Now that's the core element used by impress.js.
+    
+    That's the wrapper for your presentation steps. In this element all the impress.js magic happens.
+    It doesn't have to be a `<div>`. Only `id` is important here as that's how the script find it.
+    
+    You probably won't need it now, but there are some configuration options that can be set on this element.
+    
+    To change the duration of the transition between slides use `data-transition-duration="2000"` giving it
+    a number of ms. It defaults to 1000 (1s).
+    
+    You can also control the perspective with `data-perspective="500"` giving it a number of pixels.
+    It defaults to 1000. You can set it to 0 if you don't want any 3D effects.
+    If you are willing to change this value make sure you understand how CSS perspective works:
+    https://developer.mozilla.org/en/CSS/perspective
+    
+    But as I said, you won't need it for now, so don't worry - there are some simple but interesting things
+    right around the corner of this tag ;)
+    
+-->
+<div id="impress" data-transition-duration="500">
+
+    <!--
+        
+        Each step of the presentation should be an element inside the `#impress` with a class name
+        of `step`. 
+        
+        Positioning information is passed through data attributes.
+        
+        we specify x and y position of the step element with `data-x="-1000"`
+        and `data-y="-1500"` attributes. 
+
+        This means that **the center** of the element (yes, the center) will be positioned in point x = -1000px and y = -1500px of the presentation 'canvas'.It will not be rotated or scaled.
+        
+    -->
+    <div id="bored" class="step" data-x="-2000" data-y="-2000" data-scale="4">
+        <q>自古成大事者必經三個階段：</q>
+        <p>昨夜西风凋碧树,独上西楼,望尽天涯路 </p>
+        <p>为伊消得人憔悴,衣带渐宽终不悔</p>
+        <p>众里寻他千百度,蓦然回首,那人却在灯火阑珊处</p>
+    </div>
+    <!--
+        
+        The `id` attribute of the step element is used to identify it in the URL, but it's optional.
+        If it is not defined, it will get a default value of `step-N` where N is a number of slide.
+        
+        So in the example below it'll be `step-2`.
+        
+        The hash part of the url when this step is active will be `#/step-2`.
+        
+        You can also use `#step-2` in a link, to point directly to this particular step.
+        
+        Please note, that while `#/step-2` (with slash) would also work in a link it's not recommended.
+        
+    -->
+    <div class="step slide" data-x="0" data-y="-1500">
+        <q>High salary </q>
+        <q>Facing customs </q>
+        <q>New technology </q>
+    </div>
+
+    <div class="step slide" data-x="1000" data-y="-1500">
+        <q><strong>What are ur concerns？</strong></q>
+
+        <p>模块化(commonjs,modules,components/widgets)</p>
+        <p>前端js框架(Angular,React, Redux ... )</p>
+        <p>css框架(bootstrap) && css预处理器(less, sass)</p>
+        <p>js预处理器( ES6-7, typeScript)</p>
+        <p>js语言标准(ECMAScript, 犀牛书)</p>
+        <p>可维护性( MVC, ood, 自主研发框架)</p>
+    </div>
+
+    <div class="step slide" data-x="2000" data-y="-1500">
+        <q><strong>and how about:</strong></q>
+
+        <p>跨终端(responsive, 兼容性问题)</p>
+        <p>css3 api (transform 3D, animation)</p>
+        <p>hybrid (phonegap, jquery mobile)</p>
+        <p>中间件/后端(node js, Java，Python)</p>
+        <p>html5 api/new tag (websocket, webworker, article, figure，video, canvas2d, webGL)</p>
+        <p>移动前端开发(viewport, touch event)</p>
+    </div>
+    
+    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    </div>
+
+</div>
+
+<div class="hint">
+    <p>Author: Rock Wang</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+<!--
+    
+    The `impress()` function also gives you access to the API that controls the presentation.
+    
+    Just store the result of the call:
+    
+        var api = impress();
+    
+    and you will get three functions you can call:
+    
+        `api.init()` - initializes the presentation,
+        `api.next()` - moves to next step of the presentation,
+        `api.prev()` - moves to previous step of the presentation,
+        `api.goto( stepIndex | stepElementId | stepElement, [duration] )` - moves the presentation to the step given by its index number
+                id or the DOM element; second parameter can be used to define duration of the transition in ms,
+                but it's optional - if not provided default transition duration for the presentation will be used.
+    
+    You can also simply call `impress()` again to get the API, so `impress().next()` is also allowed.
+    Don't worry, it wont initialize the presentation again.
+    
+    For some example uses of this API check the last part of the source of impress.js where the API
+    is used in event handlers.
+    
+-->
+
+</body>
+</html>
